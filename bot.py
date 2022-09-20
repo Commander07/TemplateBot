@@ -6,7 +6,7 @@ from guilded.ext import commands
 from jsonfile import jsonfile
 
 load_dotenv()
-bot = commands.Bot(command_prefix="!")
+bot = commands.Bot(command_prefix="!", help_command=None)
 # Init database
 db = jsonfile.jsonfile("data.json")
 # If 'data.json' does not exist create it and set it to default
@@ -42,7 +42,7 @@ async def on_ready():
     print(f"Succesfully connected to guilded i am {bot.user.name}!")
 
 
-@bot.command(name="setmodrole")
+@bot.command(name="setmodroles")
 async def set_mod_role(ctx, roles: str):
     if not ctx.author.is_owner():
         await ctx.send("ERROR: Missing permissions!")
@@ -53,6 +53,13 @@ async def set_mod_role(ctx, roles: str):
     await ensure_guild(ctx.guild.id)
     db.data["guilds"][ctx.guild.id]["mod_roles"] = mod_roles
     await ctx.send("Succesfully set mod roles")
+
+
+@bot.command(name="help")
+async def _help(ctx):
+    await ctx.send(
+        "!setmodroles <roles...>   -   Sets which roles are counted as a moderator"
+    )
 
 
 @bot.event
