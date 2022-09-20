@@ -1,0 +1,3 @@
+[submodule "jsonfile"]
+	path = jsonfile
+	url = https://github.com/SzieberthAdam/jsonfile
