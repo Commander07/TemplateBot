@@ -55,23 +55,6 @@ async def set_mod_role(ctx, roles: str):
     await ctx.send("Succesfully set mod roles")
 
 
-@bot.command()
-async def config(ctx, key: str, value: bool):
-    if not is_mod(ctx):
-        await ctx.send("ERROR: Missing permissions!")
-        return
-    # Make sure we have a guild object
-    await ensure_guild(ctx.guild.id)
-    # Change the value
-    db.data["guilds"][ctx.guild.id][key] = value
-    await ctx.send("Succesfully stored data")
-
-
-@bot.command()
-async def ping(ctx):
-    await ctx.send(f"My ping is {round(bot.latency * 1000)} ms!")
-
-
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
