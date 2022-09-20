@@ -1,4 +1,4 @@
-# Template Mod
+# Template Bot
 
 ## Running
 
